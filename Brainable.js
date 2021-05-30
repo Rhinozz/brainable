@@ -1,11 +1,12 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: deep-blue; icon-glyph: hdd;
+
 /*
 A brainf*** interpreter in Scriptable.
 Code almost entirely from Shawn McLaughlin's interpreter - https://gist.github.com/shawnmcla/9a6f98fe4f176b99fe1720b3bc23f005
 
-Forked by Rhinozz into Brainable.
+Forked by Rhinozz.
 
 Added:
 - iOS input support
