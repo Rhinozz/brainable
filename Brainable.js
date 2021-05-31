@@ -24,8 +24,7 @@ alert.addAction('Run');
 await alert.present();
 
 // Create a new 30,000 size array, with each cell initialized with the value of 0. Memory can expand.
-const MEMORY_SIZE = 30000;
-const memory = new Array(MEMORY_SIZE).fill(0);
+const memory = new Array(30000).fill(0);
 // Instruction pointer and memory pointer (Points to the current INSTRUCTION)
 let ipointer = mpointer = 0;
 // Address stack. Used to track addresses (index) of left brackets
