@@ -1,6 +1,3 @@
-// Variables used by Scriptable.
-// These must be at the very top of the file. Do not edit.
-// icon-color: deep-blue; icon-glyph: hdd;
 /*
 A brainf*** interpreter in Scriptable.
 Code almost entirely from Shawn McLaughlin's inrerpreter - https://gist.github.com/shawnmcla/9a6f98fe4f176b99fe1720b3bc23f005
@@ -12,6 +9,7 @@ Added:
 - Automatic output
 - Pointer wrapping
 - Tape wrapping
+- Warnings for debugging
 - Commenting
 */
 
@@ -36,6 +34,11 @@ let program = alert.textFieldValue(0);
 let input = alert.textFieldValue(1);
 let output = "";
 
+// If program is empty, warn
+if (!input.includes('.')) {
+    logWarning('Warning: Your program does not contain a \'.\'. It will not print anything.');
+}
+
 function resetState() {
     // Clear memory, reset pointers to zero
     memory.fill(0);
@@ -59,6 +62,9 @@ function getInput() {
         val = input.charCodeAt(0);
         // Remove the first character from the string as it is "consumed" by the program
         input = input.substring(1);
+    } else {
+        // If input is empty, warn
+        logWarning('Warning: You have a blank input. It has been defaulted to 0.');
     }
     
     // Return value of input
@@ -95,7 +101,7 @@ while (!end) {
             
         // Add 1 to cell
         case '+':
-            if(memory[mpointer] == 255) {
+            if (memory[mpointer] == 255) {
                 // If we try to access a value beyond 255, wrap back to 0
                 memory[mpointer] = 0;
             } else {
@@ -106,7 +112,7 @@ while (!end) {
             
         // Subtract 1 from cell
         case '-':
-            if(memory[mpointer] == 0) {
+            if (memory[mpointer] == 0) {
                 // If we try to access a value beyond 255, wrap back to 0
                 memory[mpointer] = 255;
             } else {
@@ -129,7 +135,7 @@ while (!end) {
             
         // Start loop
         case '[':
-            if(memory[mpointer]) {
+            if (memory[mpointer]) {
                 // If non-zero, track current location and continue
                 astack.push(ipointer);
             } else {
@@ -137,19 +143,19 @@ while (!end) {
                 // Start loop count
                 let count = 0;
                 // Start actual loop
-                while(true) {
+                while (true) {
                     ipointer++;
                     if (!program[ipointer]) {
                         // Backup if something is undefined
                         break;
                     }
-                    if(program[ipointer] === "[") {
+                    if (program[ipointer] === "[") {
                         // If start of loop, continue
                         count++;
                     }
-                    else if(program[ipointer] === "]") {
+                    else if (program[ipointer] === "]") {
                         // If end of loop
-                        if(count) {
+                        if (count) {
                             // Decrement loop counter
                             count--;
                         } else {
