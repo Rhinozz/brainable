@@ -9,4 +9,5 @@ Added:
 - Automatic outputs
 - Pointer wrapping
 - Tape wrapping
+- Warnings for debugging
 - Commenting
