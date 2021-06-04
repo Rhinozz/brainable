@@ -35,7 +35,7 @@ let input = alert.textFieldValue(1);
 let output = "";
 
 // If program is empty, warn
-if (!input.includes('.')) {
+if (!program.includes('.')) {
     logWarning('Warning: Your program does not contain a \'.\'. It will not print anything.');
 }
 
